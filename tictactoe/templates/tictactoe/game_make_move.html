@@ -1,0 +1,52 @@
+{% extends 'tictactoe/game_detail.html' %}
+
+
+{% block css %}
+    {{ block.super }}
+
+    <style type="text/css">
+
+        .empty:hover {
+            cursor: pointer;
+            background-color: #b9def0;
+        }
+
+        .empty-selected {
+            cursor: pointer;
+            background-color: #2aabd2;
+        }
+
+
+    </style>
+{% endblock css %}
+
+
+{% block make_move %}
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form.x.as_hidden }}
+        {{ form.y.as_hidden }}
+        <button type="submit" id="submit_move" disabled="disabled">Submit</button>
+    </form>
+
+{% endblock make_move %}
+
+
+{% block javascript %}
+    {{ block.super }}
+
+    <script>
+        $('.empty').click(function (e) {
+            var x = $(this).data('x');
+            var y = $(this).parent().data('y');
+            $('#id_x').val(x);
+            $('#id_y').val(y);
+            $('#submit_move').removeAttr('disabled');
+
+            $('.empty-selected').removeClass('empty-selected');
+            $(this).addClass('empty-selected');
+
+        });
+
+    </script>
+{% endblock javascript %}

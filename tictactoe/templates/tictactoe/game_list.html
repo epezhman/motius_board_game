@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+    <div class="well col-md-6">
+    
+        {% include 'user/partials/user_games.html' with game_title="All Games" game_list=object_list %}
+
+    </div>
+{% endblock content %}

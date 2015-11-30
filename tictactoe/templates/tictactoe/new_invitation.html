@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+
+{% block content %}
+
+    <div class="well col-md-6">
+
+        <form action="" method="post">
+
+            {% csrf_token %}
+            {{ form |crispy }}
+
+            <input type="submit" value="Sent Invitation">
+
+        </form>
+
+    </div>
+
+{% endblock content %}

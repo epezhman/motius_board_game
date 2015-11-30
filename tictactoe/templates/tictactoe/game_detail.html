@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Game: {{ game }}{% endblock title %}<
+
+{% block css %}
+    {{ block.super }}
+
+    <style>
+        .game-table {
+            width: 150px;
+            border-width: 2px;
+        }
+
+        .tictactoe-cell {
+            height: 50px;
+            width: 50px;
+            font-size: x-large;
+            text-align: center;
+            background-color: #dff0d8;
+        }
+
+
+    </style>
+{% endblock css %}
+
+
+{% block content %}
+
+    <h3> Game: {{ game }} </h3>
+
+    <div class="col-md-9 well">
+        <table class="table table-bordered game-table">
+            {% for line in game.as_board %}
+                <tr  data-y="{{ forloop.counter0 }}">
+                    {% for square in line %}
+                        <td class="tictactoe-cell {% if not square %}empty{% endif %}"
+                        data-x="{{ forloop.counter0 }}">
+
+                            {{ square }}
+                        </td>
+
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+
+        </table>
+
+        {% block make_move %}
+        {% endblock make_move %}
+
+    </div>
+
+{% endblock content %}

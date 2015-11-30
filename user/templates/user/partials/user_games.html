@@ -1,0 +1,28 @@
+<h2> {{ game_title }}</h2>
+
+<div class="list-group">
+    {% for game in game_list %}
+        <a class="list-group-item" href="{% url 'game_detail' pk=game.pk %}">
+            {{ game }}:
+            {% if game.state == 'A' %}
+                {% if game.next_to_play == user %}
+                    Your Turn !
+                {% else %}
+                    Waiting for your oppnent  move
+                {% endif %}
+            {% elif game.state == 'D' %}
+                Draw
+            {% elif game.state == 'F' and user == game.first_player %}
+                You Won
+            {% elif game.state == 'S' and user == game.second_player %}
+                You Won
+            {% else %}
+                Lost
+            {% endif %}
+
+            <span class="badge">{{ game.move_set.count }}</span>
+        </a>
+    {% empty %}
+        <span> No game</span>
+    {% endfor %}
+</div>

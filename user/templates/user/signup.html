@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+    Sign Up!
+{% endblock title %}
+
+{% block content %}
+    <div class="well col-md-6">
+
+        <fieldset>
+            <legend>
+                Create An Account
+            </legend>
+            <div class="panel-body">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form | crispy }}
+                    <p><input type="submit" value="Sign Up!"></p>
+                </form>
+
+            </div>
+        </fieldset>
+
+    </div>
+{% endblock content %}

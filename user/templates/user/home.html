@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %} User Home Page{% endblock title %}
+
+{% block content %}
+
+    <div class="well col-md-6">
+
+
+        {% include 'user/partials/user_games.html' with game_title="Waiting Games" game_list=waiting_games %}
+
+        {% include 'user/partials/user_games.html' with game_title="Finished Games" game_list=finished_games %}
+
+        {% include 'user/partials/user_games.html' with game_title="Other Games" game_list=other_games %}
+
+
+    </div>
+
+    <div class="well col-md-5 col-md-offset-1">
+        {% if invitations %}
+            <h3 class="panel-header"> Open Invitations</h3>
+            <div class="list-group">
+                {% for inv in invitations %}
+                    <a class="list-group-item" href="{% url 'accept_invitation' pk=inv.pk %}">
+                        {{ inv.from_user.username }} Invited you to play!
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <a href="{% url 'new_invitation' %}" class="btn btn-primary">New Invitation</a>
+
+    </div>
+
+{% endblock content %}
+

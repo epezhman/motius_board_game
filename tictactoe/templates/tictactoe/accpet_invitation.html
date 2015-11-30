@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+    <div class="well col-md-6">
+
+        <h3> {{ invitation.from_user.username }} Invited you to play</h3>
+
+        {% if invitation.comment %}
+
+            <h4> The user wrote you and invitation comment</h4>
+            <p> {{ invitation.comment }}</p>
+        {% endif %}
+
+        <form action="{% url 'accept_invitation' pk=invitation.pk %}" method="POST">
+            {% csrf_token %}
+            <input name="accept" value="Accept Invitation" type="submit">
+            <input name="deny" value="Deny Invitation" type="submit">
+
+        </form>
+
+    </div>
+
+{% endblock content %}
